@@ -12,7 +12,7 @@
 				<div class="top-right links">
 					<a class="nav-item" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart</a>
 					@auth
-					<a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+					<a href="{{ url('/home') }}"><i class="fa fa-sliders" aria-hidden="true"></i> Dashboard</a>
 					@else
 					<a href="{{ route('login') }}">Login</a>
 

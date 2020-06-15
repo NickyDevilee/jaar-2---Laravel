@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>title</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::to('css/style.css') }}">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="https://media.s-bol.com/YEpmLqgp8ELM/550x774.jpg" class="img-fluid">
+			</div>
+			<div class="card col-md-8 p-0 text-center">
+				<div class="card-body">
+					<h1 class="card-title">{{ $product->title }}</h1>
+					<p class="card-text">{{ $product->description }}</p>
+					<span class="badge badge-danger">{{ $product->category_id }}</span>
+				</div>
+				<div class="card-footer">
+					<div class="justify-content-between">
+						<span class="alert alert-info float-left">€{{ $product->price }},-</span>
+						<a href="#" class="btn btn-success float-right"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+</html>
