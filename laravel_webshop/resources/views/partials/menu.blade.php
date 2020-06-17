@@ -10,7 +10,10 @@
 			<a class="nav-item nav-link" href="#">Pricing</a>
 			@if (Route::has('login'))
 				<div class="top-right links">
-					<a class="nav-item" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart</a>
+					<a class="nav-item" href="{{ route('opdracht.cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 
+						Shopping Cart
+						<span class="badge badge-danger">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : 'empty' }}</span>
+					</a>
 					@auth
 					<a href="{{ url('/home') }}"><i class="fa fa-sliders" aria-hidden="true"></i> Dashboard</a>
 					@else

@@ -12,14 +12,14 @@ Home
 				<div class="card col-md-3 col-6">
 					<div class="bg-image" style="background-image: url({{ $product->image_path }});"></div>
 					<div class="card-body">
-						<h5 class="card-title">{{ $product->title }}</h5>
+						<a href="/product/{{ $product->id }}"><h5 class="card-title text-center">{{ $product->title }}</h5></a>
 						<p class="card-text">{{ $product->description }}</p>
 						<span class="badge badge-danger">{{ $product->category_id }}</span>
 					</div>
 					<div class="card-footer">
 						<div class="justify-content-between">
 							<span class="alert alert-info float-left">€{{ $product->price }},-</span>
-							<a href="#" class="btn btn-success float-right"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+							<a href="{{ route('opdracht.addToCart', ['id' => $product->id]) }}" class="btn btn-success float-right"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
 						</div>
 					</div>
 				</div>

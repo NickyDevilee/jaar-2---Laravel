@@ -21,3 +21,18 @@ Route::get('/', [
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/add-to-cart/{id}', [
+	'uses' => 'products_controller@getAddToCart',
+	'as' => 'opdracht.addToCart'
+]);
+
+Route::get('/product/{id}', [
+	'uses' => 'products_controller@getProduct',
+	'as' => 'products.product'
+]);
+
+Route::get('/cart', [
+    'uses' => 'products_controller@getCart',
+    'as' => 'opdracht.cart'
+]);
