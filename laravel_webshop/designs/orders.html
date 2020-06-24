@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>title</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::to('css/style.css') }}">
+</head>
+<body>
+	<div class="container">
+
+		<div id="accordion">
+
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0 text-center">
+						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							Item #1
+						</button>
+					</h5>
+				</div>
+				<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="row">
+						<div class="col-md-4 border-right">
+							<div class="card-body">
+								<h4 class="card-title">Card title</h4>
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<h5 class="text-center">Items:</h5>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Cras justo odio - 90euro <a href="#" class="float-right p-0 btn btn-info">Info</a></li>
+								<li class="list-group-item">Dapibus ac facilisis in - 90euro <a href="#" class="float-right p-0 btn btn-info">Info</a></li>
+								<li class="list-group-item">Vestibulum at eros - 90euro <a href="#" class="float-right p-0 btn btn-info">Info</a></li>
+
+								<li class="list-group-item"><b>Totaal:</b> <span class="float-right">270euro</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0 text-center">
+						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+							Item #1
+						</button>
+					</h5>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="row">
+						<div class="col-md-4 border-right">
+							<div class="card-body">
+								<h4 class="card-title">Card title</h4>
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<h5 class="text-center">Items:</h5>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Cras justo odio - 90euro <a href="#" class="float-right p-0 btn btn-info">Info</a></li>
+								<li class="list-group-item">Dapibus ac facilisis in - 90euro <a href="#" class="float-right p-0 btn btn-info">Info</a></li>
+								<li class="list-group-item">Vestibulum at eros - 90euro <a href="#" class="float-right p-0 btn btn-info">Info</a></li>
+
+								<li class="list-group-item"><b>Totaal:</b> <span class="float-right">270euro</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+</html>
