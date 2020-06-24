@@ -5,9 +5,17 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-			<a class="nav-item nav-link" href="#">Features</a>
-			<a class="nav-item nav-link" href="#">Pricing</a>
+			<a class="nav-item nav-link active" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Categories
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					@foreach($categories as $category)
+						<a class="dropdown-item" href="/category/{{ $category->id }}">{{ $category->category_name }}</a>
+					@endforeach
+				</div>
+			</li>
 			@if (Route::has('login'))
 				<div class="top-right links">
 					<a class="nav-item" href="{{ route('opdracht.cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 
@@ -28,3 +36,4 @@
 		</div>
 	</div>
 </nav>
+

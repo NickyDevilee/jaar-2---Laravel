@@ -14,7 +14,6 @@ Home
 					<div class="card-body">
 						<a href="/product/{{ $product->id }}"><h5 class="card-title text-center">{{ $product->title }}</h5></a>
 						<p class="card-text">{{ $product->description }}</p>
-						<span class="badge badge-danger">{{ $product->category_id }}</span>
 					</div>
 					<div class="card-footer">
 						<div class="justify-content-between">

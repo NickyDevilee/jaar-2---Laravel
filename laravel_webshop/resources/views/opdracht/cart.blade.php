@@ -35,16 +35,15 @@ Shopping Cart
                                         <div class="p-2">
                                             <img src="{{ $product['item']['image_path'] }}" alt="" width="70" class="img-fluid rounded shadow-sm" />
                                             <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"><a href="/product/{{ $product['item']['id'] }}" class="text-dark d-inline-block align-middle">{{ $product['item']['title'] }}</a></h5>
-                                                <span class="text-muted font-weight-normal font-italic d-block">Category: {{ $product['item']['category_id'] }}</span>
+                                                <h5 class="mb-0">{{ $product['item']['title'] }}</h5>
                                             </div>
                                         </div>
                                     </th>
                                     <td class="border-0 align-middle"><strong>€{{ $product['price'] }},-</strong></td>
                                     <td class="border-0 align-middle"><strong>{{ $product['qty'] }}</strong></td>
                                     <td class="border-0 align-middle">
-                                        <a href="#" class="text-white btn btn-dark"><i class="fa fa-trash"></i></a>
-                                        <a href="" class="text-white btn btn-dark"><i class="fa fa-minus"></i></a>
+                                        <a href="{{ route('products.empty', ['id'  => $product['item']['id']]) }}" class="text-white btn btn-dark"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('products.reduceOne', ['id'  => $product['item']['id']]) }}" class="text-white btn btn-dark"><i class="fa fa-minus"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

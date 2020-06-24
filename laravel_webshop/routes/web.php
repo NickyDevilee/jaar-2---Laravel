@@ -36,3 +36,18 @@ Route::get('/cart', [
     'uses' => 'products_controller@getCart',
     'as' => 'opdracht.cart'
 ]);
+
+Route::get('/category/{id}', [
+    'uses' => 'products_controller@getProductsFromCatId',
+    'as' => 'opdracht.category'
+]);
+
+Route::get('/reduce/{id}', [
+    'uses' => 'products_controller@getReduce',
+    'as' => 'products.reduceOne'
+]);
+
+Route::get('/empty/{id}', [
+    'uses' => 'products_controller@getEmpty',
+    'as' => 'products.empty'
+]);
