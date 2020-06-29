@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\products;
 use App\categories;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class OrdersController extends Controller
 {
-    public function getProducts() {
-    	$products = products::all();
-        $categories = categories::all();
-    	return view('opdracht.index', ['products' => $products, 'categories' => $categories]);
-    }
+	public function getOrders()
+	{
+		$categories = categories::all();
+		$orders = Auth::user()->orders;
+		$orders->transform(function($order, $key){
+			$order->products = unserialize($order->products);
+			return $order;
+		});
+		return view('opdracht.orders', ['orders'=> $orders, 'categories' => $categories]);
+	}
 }

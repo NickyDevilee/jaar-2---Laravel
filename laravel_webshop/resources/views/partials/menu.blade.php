@@ -16,6 +16,9 @@
 					@endforeach
 				</div>
 			</li>
+			@auth
+				<a class="nav-item nav-link" href="{{ route('opdracht.orders') }}">Orders</a>
+			@endauth
 			@if (Route::has('login'))
 				<div class="top-right links">
 					<a class="nav-item" href="{{ route('opdracht.cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 

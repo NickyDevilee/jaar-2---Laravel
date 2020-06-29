@@ -6,6 +6,12 @@ Home
 
 @section('content')
 
+	@if(!empty($_GET['success']))
+        <div class="alert alert-success" role="alert">
+            {{ $_GET['success'] }}
+        </div>
+    @endif
+
 	@foreach($products->chunk(4) as $productChunk)
 		<div class="card-deck row justify-content-center mt-3">
 			@foreach($productChunk as $product)

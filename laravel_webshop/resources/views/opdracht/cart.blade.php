@@ -6,6 +6,12 @@ Shopping Cart
 
 @section('content')
 
+    @if(!empty($_GET['error']))
+        <div class="alert alert-danger" role="alert">
+            {{ $_GET['error'] }}
+        </div>
+    @endif
+
     @if(Session::has('cart'))
         <div class="row">
             <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
@@ -59,7 +65,14 @@ Shopping Cart
                             <h5 class="font-weight-bold">€{{$totalPrice}},-</h5>
                         </li>
                     </ul>
-                    <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                    @auth
+                        <form action="{{ route('products.checkout') }}" method="post">
+                            <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block">Checkout</button>
+                            {{ csrf_field() }}
+                        </form>
+                    @else
+                    <p class="alert alert-danger text-center">please login</p>
+                    @endauth
                 </div>
 
             </div>

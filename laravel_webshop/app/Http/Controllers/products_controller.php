@@ -5,76 +5,102 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\products;
 use App\categories;
+use App\orders;
+
+use Auth;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class products_controller extends Controller
 {
-    public function getProducts() {
-    	$products = products::all();
-        $categories = categories::all();
-    	return view('opdracht.index', ['products' => $products, 'categories' => $categories]);
-    }
+	public function getProducts() {
+		$products = products::all();
+		$categories = categories::all();
+		return view('opdracht.index', ['products' => $products, 'categories' => $categories]);
+	}
 
-    public function getProduct($id) {
-    	$product = products::find($id);
-        $categories = categories::all();
+	public function getProduct($id) {
+		$product = products::find($id);
+		$categories = categories::all();
 
-    	return view('opdracht.product', ['product' => $product, 'categories' => $categories]);
-    }
+		return view('opdracht.product', ['product' => $product, 'categories' => $categories]);
+	}
 
-    public function getProductsFromCatId($catId) {
-        $category = categories::find($catId);
-        $products = DB::select('select * from products where category_id = ?', [$catId]);
-        $categories = categories::all();
+	public function getProductsFromCatId($catId) {
+		$category = categories::find($catId);
+		$products = DB::select('select * from products where category_id = ?', [$catId]);
+		$categories = categories::all();
 
-        return view('opdracht.category', ['products' => $products, 'category' => $category, 'categories' => $categories]);
-    }
+		return view('opdracht.category', ['products' => $products, 'category' => $category, 'categories' => $categories]);
+	}
 
-    public function getCart(Request $request) {
-        $categories = categories::all();
-        if (!$request->session()->has('cart')) {
-            return view('opdracht.cart', ['categories' => $categories]);
-        }
-        $oldCart = $request->session()->get('cart');
-        $cart = new Cart($oldCart);
-        return view('opdracht.cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'categories' => $categories]);
-    }
+	public function getCart(Request $request) {
+		$categories = categories::all();
+		if (!$request->session()->has('cart')) {
+			return view('opdracht.cart', ['categories' => $categories]);
+		}
+		$oldCart = $request->session()->get('cart');
+		$cart = new Cart($oldCart);
+		return view('opdracht.cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'categories' => $categories]);
+	}
 
-    public function getAddToCart(Request $request, $id) {
-        $product = products::find($id);
-        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
+	public function getAddToCart(Request $request, $id) {
+		$product = products::find($id);
+		$oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+		$cart = new Cart($oldCart);
+		$cart->add($product, $product->id);
 
-        $request->session()->put('cart', $cart);
-        return redirect()->route('products.index');
-    }
+		$request->session()->put('cart', $cart);
+		return redirect()->route('products.index');
+	}
 
-    public function getReduce(Request $request, $id){
-        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->reduceOne($id);
+	public function getReduce(Request $request, $id){
+		$oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+		$cart = new Cart($oldCart);
+		$cart->reduceOne($id);
 
-        if(count($cart->items) > 0){
-            $request->session()->put('cart', $cart);
-        }else{
-            $request->session()->forget('cart');
-        }
-        return redirect()->route('opdracht.cart');
-    }
+		if(count($cart->items) > 0){
+			$request->session()->put('cart', $cart);
+		}else{
+			$request->session()->forget('cart');
+		}
+		return redirect()->route('opdracht.cart');
+	}
 
-    public function getEmpty(Request $request, $id){
-        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->empty($id);
+	public function getEmpty(Request $request, $id){
+		$oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+		$cart = new Cart($oldCart);
+		$cart->empty($id);
 
-        if(count($cart->items) > 0){
-            $request->session()->put('cart', $cart);
-        }else{
-            $request->session()->forget('cart');
-        }
+		if(count($cart->items) > 0){
+			$request->session()->put('cart', $cart);
+		}else{
+			$request->session()->forget('cart');
+		}
 
-        return redirect()->route('opdracht.cart');
-    }
+		return redirect()->route('opdracht.cart');
+	}
+
+	public function postCheckout(Request $request){
+		if (!$request->session()->has('cart')){
+			return redirect()->route('opdracht.cart', ['error' => 'mandje leeg']);
+		}
+		$oldCart = $request->session()->get('cart');
+		$cart = new Cart($oldCart);
+
+		try {
+			$order = new orders();
+			$order->products = serialize($cart);
+
+			Auth::user()->orders()->save($order);
+
+		} catch (\Exception $e) {
+			return redirect()->route('opdracht.cart', ['error' => $e->getMessage()]);
+		}
+
+		$request->session()->forget('cart');
+		return redirect()->route('products.index', ['success' => 'Successfully purchased products!']);
+
+	}
 }

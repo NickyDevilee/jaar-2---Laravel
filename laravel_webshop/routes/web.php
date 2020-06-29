@@ -51,3 +51,13 @@ Route::get('/empty/{id}', [
     'uses' => 'products_controller@getEmpty',
     'as' => 'products.empty'
 ]);
+
+Route::post('/checkout', [
+    'uses' => 'products_controller@postCheckout',
+    'as' => 'products.checkout'
+]);
+
+Route::get('/orders', [
+    'uses' => 'OrdersController@getOrders',
+    'as' => 'opdracht.orders'
+]);
